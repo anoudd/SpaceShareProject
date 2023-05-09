@@ -14,7 +14,7 @@
         android:layout_marginTop="279dp"
         android:layout_marginEnd="182dp"
         android:layout_marginBottom="433dp"
-        android:text="TextView"
+        android:text="welcome"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
