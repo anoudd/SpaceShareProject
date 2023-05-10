@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 public class DataBase3 extends SQLiteOpenHelper {
 
 
-    public static final String DBNAME = "Login.db";
+    public static final String DBNAME = "Login1.db";
 
     // public static final String TABLENAME1 = "users2";
     public static final String TABLE = "Users";
@@ -63,6 +63,44 @@ public class DataBase3 extends SQLiteOpenHelper {
         return false;
     }
 
+    public Boolean checkPassword(String password) {
+        boolean valid = true;
+
+        boolean letter;
+        boolean digit ;
+        int letters =0;
+        int digits = 0;
+
+        for (int i=0; i<password.length(); i++ ){
+
+            letter =Character.isLetter(password.charAt(i)) ;
+            digit =Character.isDigit(password.charAt(i)) ;
+            if (digit)
+                digits++;
+            if (letter)
+                letters++;
+        }
+        int specialChar= password.length()-( digits+letters);
+
+        if ((password.length()<8) ||( password.contains("-"))||(letters<4) ||(digits<1) || (specialChar<1))
+            valid=false;
+
+        return valid;
+
+    }
+    public Boolean checkPhone(String phonenumber) {
+        boolean valid = true;
+        boolean digit ;
+        int digits = 0;
+        for (int i=0; i<phonenumber.length(); i++ ) {
+            digit =Character.isDigit(phonenumber.charAt(i)) ;
+            if (digit)
+                digits++;
+        }
+        if (phonenumber.length()!=10 ||digits!=10 || phonenumber.charAt(0)!='0' )
+            valid =false;
+        return valid;
+    }
     public Boolean checkUsernamePassword(String username, String password){
         SQLiteDatabase MyDB = this.getWritableDatabase();
         Cursor cursor = MyDB.rawQuery("Select * from " + TABLE + " where " + COL1 + " = ? and " + COL2 + " = ?", new String[] {username,password});

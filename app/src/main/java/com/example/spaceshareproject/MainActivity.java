@@ -42,15 +42,26 @@ public class MainActivity extends AppCompatActivity {
                 if(user.equals("")||pass.equals(""))
                     Toast.makeText(MainActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 else{
-                    Boolean checkUser = DB.checkUsername(user);
+                    Boolean insert=false;
+                    Boolean checkUser= DB.checkUsername(user);
+                    Boolean validInfo = false;
+                    if ( DB.checkPassword(pass) && DB.checkPhone(phone))
+                        validInfo =true;
+
+
                     if(!checkUser){
-                        Boolean insert = DB.insertData(phone , pass,first ,user, last);
+                        if (validInfo) {
+                             insert = DB.insertData(phone, pass, first, user, last);
+                        }
                         if(insert){
                             Toast.makeText(MainActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
                             startActivity(intent);
-                        }else{
-                            Toast.makeText(MainActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
+                        }else {
+                            if (!DB.checkPassword(pass))
+                            Toast.makeText(MainActivity.this, "Enter a strong password", Toast.LENGTH_SHORT).show();
+                            else if (!DB.checkPhone(phone))
+                                Toast.makeText(MainActivity.this, "Enter a correct phone number", Toast.LENGTH_SHORT).show();
                         }
                     }
                     else{
