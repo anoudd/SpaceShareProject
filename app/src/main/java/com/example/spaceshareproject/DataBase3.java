@@ -82,7 +82,7 @@ public class DataBase3 extends SQLiteOpenHelper {
         }
         int specialChar= password.length()-( digits+letters);
 
-        if ((password.length()<8) ||( password.contains("-"))||(letters<4) ||(digits<1) || (specialChar<1))
+        if ((password.length()<8) ||(letters<4) ||(digits<1) || (specialChar<1))
             valid=false;
 
         return valid;
