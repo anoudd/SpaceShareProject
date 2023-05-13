@@ -30,6 +30,9 @@ public class AddActivity extends AppCompatActivity {
                 myDB.addBook(name_input.getText().toString().trim(),
                         Integer.valueOf(price_input.getText().toString().trim()),
                         Integer.valueOf(size_input.getText().toString().trim()));
+                name_input.setText("");
+                price_input.setText("");
+                        size_input.setText("");
             }
         });
     }
