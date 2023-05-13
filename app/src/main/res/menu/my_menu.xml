@@ -8,4 +8,9 @@
         android:icon="@drawable/ic_delete"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/baseline_logout_24"
+        android:title="logout" />
+
 </menu>

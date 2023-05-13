@@ -100,10 +100,16 @@ public class HomeActivity extends AppCompatActivity {
             if(item.getItemId() == R.id.delete_all){
                 confirmDialog();
             }
+
+            if(item.getItemId() == R.id.logout){
+                Intent intentL = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intentL);
+                finish();
+            }
             return super.onOptionsItemSelected(item);
         }
 
-        void confirmDialog(){
+    void confirmDialog(){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Delete All?");
             builder.setMessage("Are you sure you want to delete all Data?");
