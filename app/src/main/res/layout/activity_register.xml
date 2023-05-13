@@ -30,6 +30,7 @@
                 android:drawablePadding="8dp"
                 android:hint="First Name"
                 android:padding="8dp"
+                android:textColor="#BAB2B2"
                 android:textColorHint="@color/white" />
 
             <EditText
@@ -43,6 +44,7 @@
                 android:drawablePadding="8dp"
                 android:hint="Last Name"
                 android:padding="8dp"
+                android:textColor="#BAB2B2"
                 android:textColorHint="@color/white" />
 
             <EditText
@@ -56,6 +58,7 @@
                 android:drawablePadding="8dp"
                 android:hint="Username"
                 android:padding="8dp"
+                android:textColor="#BAB2B2"
                 android:textColorHint="@color/white" />
 
             <EditText
@@ -68,7 +71,9 @@
                 android:drawableLeft="@drawable/ic_lock"
                 android:drawablePadding="8dp"
                 android:hint="Password"
+                android:inputType="textPassword"
                 android:padding="8dp"
+                android:textColor="#BAB2B2"
                 android:textColorHint="@color/white" />
 
 
@@ -83,6 +88,7 @@
                 android:drawablePadding="8dp"
                 android:hint="Phone Number"
                 android:padding="8dp"
+                android:textColor="#BAB2B2"
                 android:textColorHint="@color/white" />
 
             <Button
@@ -94,6 +100,7 @@
                 android:text="Sign Up"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
+
 
 
         </LinearLayout>

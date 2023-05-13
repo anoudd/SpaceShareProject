@@ -7,8 +7,6 @@
     tools:context=".HomeActivity">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -33,6 +31,7 @@
             android:drawablePadding="8dp"
             android:hint="Username"
             android:padding="8dp"
+            android:textColor="#BAB2B2"
             android:textColorHint="@color/white" />
 
         <EditText
@@ -44,8 +43,10 @@
             android:background="@drawable/edittext_bkg"
             android:drawableLeft="@drawable/ic_lock"
             android:drawablePadding="8dp"
+            android:inputType="textPassword"
             android:hint="Password"
             android:padding="8dp"
+            android:textColor="#BAB2B2"
             android:textColorHint="@color/white" />
 
         <Button
