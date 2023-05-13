@@ -12,8 +12,21 @@
         android:theme="@style/Theme.SpaceShareProject"
         tools:targetApi="31">
         <activity
+            android:name=".Register"
+            android:exported="false" />
+
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
+
+        <activity android:name=".UpdateActivity"
+            android:parentActivityName=".HomeActivity"/>
+
+        <activity
+            android:name=".AddActivity"
+            android:label="Add Office"
+            android:parentActivityName=".HomeActivity" />
+        
         <activity
             android:name=".MainActivity"
             android:exported="true">

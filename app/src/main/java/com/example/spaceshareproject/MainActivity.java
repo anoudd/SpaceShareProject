@@ -12,66 +12,51 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
 
-    EditText username, password,firstname ,lastname, phonenumber;
-    Button signup;
-   DataBase3 DB;
+    EditText login_username, login_password;
+    Button login_button, login_gotoR;
+    DataBase3 DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
 
-        firstname = findViewById(R.id.firstname);
-        lastname = findViewById(R.id.lastname);
-        phonenumber = findViewById(R.id.phonenumber);
-
-        signup = findViewById(R.id.btnsignup);
-      //  signin = findViewById(R.id.btnsignin);
+        login_username = findViewById(R.id.login_username);
+        login_password = findViewById(R.id.login_password);
+        login_button = findViewById(R.id.login_button);
+        login_gotoR = findViewById(R.id.login_gotoR);
         DB = new DataBase3(this);
-        signup.setOnClickListener(new View.OnClickListener() {
+
+        login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = username.getText().toString();
-                String pass = password.getText().toString();
-                String first  = firstname.getText().toString();
-                String last  = lastname.getText().toString();
-                String phone  = phonenumber.getText().toString();
+                String user = login_username.getText().toString();
+                String pass = login_password.getText().toString();
 
                 if(user.equals("")||pass.equals(""))
                     Toast.makeText(MainActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 else{
-                    Boolean insert=false;
-                    Boolean checkUser= DB.checkUsername(user);
-                    Boolean validInfo = false;
-                    if ( DB.checkPassword(pass) && DB.checkPhone(phone))
-                        validInfo =true;
-
-
-                    if(!checkUser){
-                        if (validInfo) {
-                             insert = DB.insertData(phone, pass, first, user, last);
-                        }
-                        if(insert){
-                            Toast.makeText(MainActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
-                            startActivity(intent);
-                        }else {
-                            if (!DB.checkPassword(pass))
-                            Toast.makeText(MainActivity.this, "Enter a strong password", Toast.LENGTH_SHORT).show();
-                            else if (!DB.checkPhone(phone))
-                                Toast.makeText(MainActivity.this, "Enter a correct phone number", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else{
-                        Toast.makeText(MainActivity.this,"Already exists! please sign in",Toast.LENGTH_SHORT).show();
+                    Boolean check = DB.checkUsernamePassword(user, pass);
+                    if (check){
+                        Toast.makeText(MainActivity.this, "Sign in successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
 
+        login_gotoR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Register.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
 }
+
