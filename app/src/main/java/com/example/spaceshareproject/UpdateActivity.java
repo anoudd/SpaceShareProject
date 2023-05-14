@@ -27,9 +27,9 @@ public class UpdateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
 
-        name_input = findViewById(R.id.name_input);
-        price_input = findViewById(R.id.price_input);
-        size_input = findViewById(R.id.size_input);
+        name_input = findViewById(R.id.office_name);
+        price_input = findViewById(R.id.office_price);
+        size_input = findViewById(R.id.offer_size);
         update_button = findViewById(R.id.update_button);
         delete_button = findViewById(R.id.delete_button);
 
@@ -63,19 +63,22 @@ public class UpdateActivity extends AppCompatActivity {
     }
 
     void getAndSetIntentData(){
-        if(getIntent().hasExtra("id") && getIntent().hasExtra("title") &&
-                getIntent().hasExtra("author") && getIntent().hasExtra("pages")){
+        Log.d("asd", getIntent().getStringExtra("id"));;
+        Log.d("asd", getIntent().getStringExtra("name"));
+        Log.d("asd", getIntent().getStringExtra("price"));
+        Log.d("asd", getIntent().getStringExtra("size"));
+        if(        getIntent().hasExtra("id")
+                && getIntent().hasExtra("name")
+                && getIntent().hasExtra("price")
+                && getIntent().hasExtra("size")){
             //Getting Data from Intent
             id = getIntent().getStringExtra("id");
             name = getIntent().getStringExtra("name");
             price = getIntent().getStringExtra("price");
             size = getIntent().getStringExtra("size");
-
-            //Setting Intent Data
-            name_input.setText(name);
-            price_input.setText(price);
-            size_input.setText(size);
-            Log.d("stev", name+" "+price+" "+size);
+            name_input.append(name);
+            price_input.append(price);
+            size_input.append(size);
         }else{
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
         }
