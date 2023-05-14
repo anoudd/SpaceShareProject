@@ -44,7 +44,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(AddActivity.this);
-                myDB.addBook(name_input.getText().toString().trim(),
+                myDB.addOffice(name_input.getText().toString().trim(),
                         Integer.valueOf(price_input.getText().toString().trim()),
                         Integer.valueOf(size_input.getText().toString().trim()));
                 name_input.setText("");
