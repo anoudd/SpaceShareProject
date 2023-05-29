@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText login_username, login_password;
     Button login_button, login_gotoR;
-    DataBase3 DB;
+    MyDatabaseHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         login_password = findViewById(R.id.login_password);
         login_button = findViewById(R.id.login_button);
         login_gotoR = findViewById(R.id.login_gotoR);
-        DB = new DataBase3(this);
+        DB = new MyDatabaseHelper(this);
 
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -14,7 +14,7 @@ public class Register extends AppCompatActivity {
 
     EditText username, password,firstname ,lastname, phonenumber;
     Button signup;
-    DataBase3 DB;
+    MyDatabaseHelper DB;
 
 
     @Override
@@ -31,7 +31,7 @@ public class Register extends AppCompatActivity {
 
         signup = findViewById(R.id.btnsignup);
         //  signin = findViewById(R.id.btnsignin);
-        DB = new DataBase3(this);
+        DB = new MyDatabaseHelper(this);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

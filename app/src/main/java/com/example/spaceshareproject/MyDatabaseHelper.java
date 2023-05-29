@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
-    private static final String DATABASE_NAME = "SpaceShare.db";
+    public static final String DATABASE_NAME = "SpaceShare.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String TABLE_NAME = "offices";
@@ -21,6 +21,19 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PRICE = "office_price";
     private static final String COLUMN_SIZE = "office_size";
     public static final String COLUMN_image = "office_image";
+
+
+
+
+
+    public static final String TABLE = "Users";
+    public static final String COL1 = "username";
+    public static final String COL2 = "password";
+    public static final String COLU3 ="lastname";
+    public static final String COLU4 ="firstname";
+    public static final String COLU5 = "phonenumber";
+
+
     MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
@@ -28,17 +41,27 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " + TABLE_NAME +
+        String table1 = "CREATE TABLE " + TABLE_NAME +
                         " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         COLUMN_NAME + " TEXT, " +
                         COLUMN_PRICE + " INTEGER, " +
                         COLUMN_SIZE + " INTEGER , " +
                 COLUMN_image + " BLOB);";
-        db.execSQL(query);
+
+
+        String table2 = "CREATE TABLE " +TABLE+"(phonenumber TEXT, password TEXT, firstname TEXT ,username Text primary key, lastname TEXT   )";
+        db.execSQL(table2);
+
+        db.execSQL(table1);
+
+
+
+
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("drop Table if exists " + TABLE);
         onCreate(db);
     }
 
@@ -99,4 +122,77 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + TABLE_NAME);
     }
 
+
+
+
+    public Boolean insertData(String phonenumber, String password,String firstname, String username , String lastname){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+        contentValues.put(COL1, username);
+        contentValues.put(COL2, password);
+        contentValues.put(COLU3 ,lastname);
+        contentValues.put(COLU4 ,firstname);
+        contentValues.put(COLU5,phonenumber);
+        // contentValues.put(COL6, first);
+
+        long result = MyDB.insert(TABLE, null, contentValues);
+        if(result==-1)
+            return false;
+        return true;
+    }
+
+    public Boolean checkUsername(String username) {
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from " + TABLE + " where " + COL1 + " = ?", new String[]{username});
+        if (cursor.getCount() > 0) return true;
+        return false;
+    }
+
+    public Boolean checkPassword(String password) {
+        boolean valid = true;
+
+        boolean letter;
+        boolean digit ;
+        int letters =0;
+        int digits = 0;
+
+        for (int i=0; i<password.length(); i++ ){
+
+            letter =Character.isLetter(password.charAt(i)) ;
+            digit =Character.isDigit(password.charAt(i)) ;
+            if (digit)
+                digits++;
+            if (letter)
+                letters++;
+        }
+        int specialChar= password.length()-( digits+letters);
+
+        if ((password.length()<8) ||(letters<4) ||(digits<1) || (specialChar<1))
+            valid=false;
+
+        return valid;
+
+    }
+    public Boolean checkPhone(String phonenumber) {
+        boolean valid = true;
+        boolean digit ;
+        int digits = 0;
+        for (int i=0; i<phonenumber.length(); i++ ) {
+            digit =Character.isDigit(phonenumber.charAt(i)) ;
+            if (digit)
+                digits++;
+        }
+        if (phonenumber.length()!=10 ||digits!=10 || phonenumber.charAt(0)!='0' )
+            valid =false;
+        return valid;
+    }
+    public Boolean checkUsernamePassword(String username, String password){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from " + TABLE + " where " + COL1 + " = ? and " + COL2 + " = ?", new String[] {username,password});
+        if(cursor.getCount()>0) return true;
+        return false;
+    }
+
 }
+
+
