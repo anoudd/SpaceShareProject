@@ -33,7 +33,7 @@ public class AddActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
         name_input = findViewById(R.id.name_input);

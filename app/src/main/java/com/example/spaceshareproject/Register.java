@@ -30,7 +30,7 @@ public class Register extends AppCompatActivity {
         phonenumber = findViewById(R.id.phonenumber);
 
         signup = findViewById(R.id.btnsignup);
-        //  signin = findViewById(R.id.btnsignin);
+         //  signin = findViewById(R.id.btnsignin);
         DB = new MyDatabaseHelper(this);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
