@@ -40,10 +40,6 @@ public class rentActivity extends AppCompatActivity implements Dialog.DialogList
         textview=findViewById(R.id.renterInfo1);
 
 
-
-
-
-
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setTitle(name);
@@ -137,11 +133,10 @@ public class rentActivity extends AppCompatActivity implements Dialog.DialogList
             public void onClick(DialogInterface dialogInterface, int i) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(rentActivity.this);
 
-              ///  if( myDB.annnulment(id)){
-
-
-
-               // }
+               if( myDB.annnulment(id)){
+           Toast.makeText(rentActivity.this, "Annulment contract successfully!.", Toast.LENGTH_SHORT).show();
+                   finish();
+                }
                 //finish();
             }
         });

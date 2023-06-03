@@ -176,10 +176,14 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase DB = this.getReadableDatabase();
         Cursor cursor = DB.rawQuery("SELECT " + COLUMN_Availability + " FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " =?", new String[]{row_id});
 
-            String availability = cursor.getString(0);
+           // String availability = cursor.getString(0);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_Availability, "available");
+        cv.put(COLUMN_seekerNAME, " ");
+        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
 
-                SQLiteDatabase db = this.getWritableDatabase();
-                long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
+
                 if (result == -1) {
                     Toast.makeText(context, "Failed to annnulment.", Toast.LENGTH_SHORT).show();
                     return false;
