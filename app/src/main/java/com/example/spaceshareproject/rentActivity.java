@@ -1,5 +1,9 @@
 package com.example.spaceshareproject;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,34 +16,31 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-public class UpdateActivity extends AppCompatActivity  {
-
-    EditText name_input, price_input, size_input;
-    Button update_button, delete_button;
-    TextView textView;
+public class rentActivity extends AppCompatActivity implements Dialog.DialogListener{
+    EditText name_input, price_input, size_input,rentername,duration;
+    Button rent_button;
+   TextView textview;
     String id, name, price, size;
-
-
     @SuppressLint("MissingInflatedId")
     @Override
-     protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update);
+        setContentView(R.layout.activity_rent);
 
-        name_input = findViewById(R.id.office_name);
-        price_input = findViewById(R.id.office_price);
-        size_input = findViewById(R.id.offer_size);
-        update_button = findViewById(R.id.update_button);
-        delete_button = findViewById(R.id.delete_button);
-        textView=findViewById(R.id.renterInfo);
-        //First we call this
+
+        name_input = findViewById(R.id.office_name1);
+        price_input = findViewById(R.id.office_price1);
+        size_input = findViewById(R.id.offer_size1);
+        rent_button = findViewById(R.id.rent_button);
+        rentername=findViewById(R.id.rentername);
+        duration=findViewById(R.id.duration);
+        textview=findViewById(R.id.renterInfo1);
+
+
         getAndSetIntentData();
 
-        //Set actionbar title after getAndSetIntentData method
+
+
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setTitle(name);
@@ -48,19 +49,7 @@ public class UpdateActivity extends AppCompatActivity  {
 
 
 
-
-        update_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //And only then we call this
-                MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateActivity.this);
-                name = name_input.getText().toString().trim();
-                price = price_input.getText().toString().trim();
-                size = size_input.getText().toString().trim();
-                myDB.updateData(id, name, price, size);
-            }
-        });
-        delete_button.setOnClickListener(new View.OnClickListener() {
+        rent_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 confirmDialog();
@@ -68,6 +57,8 @@ public class UpdateActivity extends AppCompatActivity  {
         });
 
     }
+
+
 
     void getAndSetIntentData(){
         Log.d("asd", getIntent().getStringExtra("id"));;
@@ -91,16 +82,23 @@ public class UpdateActivity extends AppCompatActivity  {
         }
     }
 
+
+
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete " + name + " ?");
-        builder.setMessage("Are you sure you want to delete " + name + " ?");
+        builder.setTitle("Rent " + name + " ?");
+        builder.setMessage("Are you sure you want to Rent " + name + " ?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateActivity.this);
-                myDB.deleteOneRow(id);
-                finish();
+                MyDatabaseHelper myDB = new MyDatabaseHelper(rentActivity.this);
+
+               if( myDB.rent(id)){
+
+                     openDialog();
+
+               }
+                //finish();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -112,5 +110,18 @@ public class UpdateActivity extends AppCompatActivity  {
         builder.create().show();
     }
 
+    public void openDialog(){
 
-}
+Dialog dialog= new Dialog();
+dialog.show(getSupportFragmentManager(),"Rent Form");
+
+
+    }
+    @Override
+    public void applyText(String name, String duration) {
+        String s="Rented by:"+name+"  duration:"+duration;
+        textview.setText(s);
+
+    }
+
+    }

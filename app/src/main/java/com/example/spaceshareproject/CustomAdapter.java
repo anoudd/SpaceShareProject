@@ -20,18 +20,20 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
-    private Context context;
+    private  static Context context;  // made it staticcc
     private Activity activity;
+     private String who;
     private ArrayList office_id, office_name, office_price, office_size;
 
     CustomAdapter(Activity activity, Context context, ArrayList office_id, ArrayList office_name, ArrayList office_price,
-                  ArrayList office_size){
+                  ArrayList office_size , String who){
          this.activity = activity;
         this.context = context;
         this.office_id = office_id;
         this.office_name = office_name;
         this.office_price = office_price;
         this.office_size = office_size;
+        this.who=who;
     }
 
     @NonNull
@@ -53,12 +55,24 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, UpdateActivity.class);
+                Intent intent;
+                if ( who.equals("owner")){
+                 intent = new Intent(context, UpdateActivity.class);
                 intent.putExtra("id", String.valueOf(office_id.get(position)));
                 intent.putExtra("name", String.valueOf(office_name.get(position)));
                 intent.putExtra("price", String.valueOf(office_price.get(position)));
                 intent.putExtra("size", String.valueOf(office_size.get(position)));
-                activity.startActivityForResult(intent, 1);
+                activity.startActivityForResult(intent, 1);}
+
+                else { intent = new Intent(context, rentActivity.class);
+                    intent.putExtra("id", String.valueOf(office_id.get(position)));
+                    intent.putExtra("name", String.valueOf(office_name.get(position)));
+                    intent.putExtra("price", String.valueOf(office_price.get(position)));
+                    intent.putExtra("size", String.valueOf(office_size.get(position)));
+                    activity.startActivityForResult(intent, 1);}
+
+
+
             }
         });
 
@@ -70,7 +84,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         return office_id.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView office_id_txt, office_name_txt, office_price_txt, office_size_txt;
         LinearLayout mainLayout;

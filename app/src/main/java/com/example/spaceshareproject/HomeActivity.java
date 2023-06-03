@@ -57,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
             storeDataInArrays();
 
             customAdapter = new CustomAdapter(HomeActivity.this,this, office_id, office_name, office_price,
-                    office_size);
+                    office_size ,"owner");
             recyclerView.setAdapter(customAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
 

@@ -8,7 +8,7 @@
     android:padding="30dp">
 
     <EditText
-        android:id="@+id/office_name"
+        android:id="@+id/office_name1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/office_price"
+        android:id="@+id/office_price1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -29,10 +29,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/office_name" />
+        app:layout_constraintTop_toBottomOf="@+id/office_name1" />
 
     <EditText
-        android:id="@+id/offer_size"
+        android:id="@+id/offer_size1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -41,36 +41,23 @@
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/office_price" />
+        app:layout_constraintTop_toBottomOf="@+id/office_price1" />
 
     <Button
-        android:id="@+id/update_button"
+        android:id="@+id/rent_button"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="40dp"
-        android:text="Update"
+        android:text="Rent"
         android:textSize="20sp"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/offer_size"
+        app:layout_constraintTop_toBottomOf="@+id/offer_size1"
         android:textColor="@color/white"/>
 
-    <Button
-        android:id="@+id/delete_button"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="16dp"
-        android:text="Delete"
-        android:textAllCaps="false"
-        android:textColor="@color/red"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/update_button" />
-
     <TextView
-        android:id="@+id/renterInfo"
+        android:id="@+id/renterInfo1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
@@ -78,11 +65,14 @@
         android:ems="10"
         android:text="Rented by: No one  Duration:"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/office_name"
+        app:layout_constraintBottom_toTopOf="@+id/office_name1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.602" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,15 @@
         android:theme="@style/Theme.SpaceShareProject"
         tools:targetApi="31">
         <activity
+            android:name=".CustomAdapter2"
+            android:exported="false" />
+        <activity
+            android:name=".rentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity2"
+            android:exported="false" />
+        <activity
             android:name=".Register"
             android:exported="false" />
         <activity

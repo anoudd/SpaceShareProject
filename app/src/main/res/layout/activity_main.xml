@@ -7,19 +7,27 @@
     tools:context=".HomeActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="414dp"
+        android:layout_height="718dp"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-3dp"
+        tools:layout_editor_absoluteY="16dp">
 
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="170dp"
-            android:src="@drawable/logo"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="70dp"/>
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/logo" />
 
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:text="Owner" />
 
         <EditText
             android:id="@+id/login_username"
@@ -43,8 +51,8 @@
             android:background="@drawable/edittext_bkg"
             android:drawableLeft="@drawable/ic_lock"
             android:drawablePadding="8dp"
-            android:inputType="textPassword"
             android:hint="Password"
+            android:inputType="textPassword"
             android:padding="8dp"
             android:textColor="#BAB2B2"
             android:textColorHint="@color/white" />
@@ -57,17 +65,20 @@
             android:layout_marginTop="30dp"
             android:text="Log In"
             android:textColor="@color/white"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/login_gotoR"
             android:layout_width="300dp"
-            android:layout_height="70dp"
+            android:layout_height="75dp"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:text="Don't have an account? Register"
             android:textColor="@color/white"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
+
+
+
     </LinearLayout>
 
 
