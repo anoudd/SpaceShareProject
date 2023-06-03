@@ -1,7 +1,5 @@
 package com.example.spaceshareproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,8 +47,10 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent;
                         if(RadioButtonState){
                         intent = new Intent(getApplicationContext(),HomeActivity.class);
+                        intent.putExtra("login_username", user);
                         startActivity(intent);}
-                             else{intent = new Intent(getApplicationContext(),HomeActivity2.class);
+                             else{intent = new Intent(getApplicationContext(), HomeActivity.class);
+                            intent.putExtra("login_username", user);
                             startActivity(intent);}
 
                     } else {
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Register.class);
+
                 startActivity(intent);
             }
         });

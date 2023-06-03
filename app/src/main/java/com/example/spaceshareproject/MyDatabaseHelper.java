@@ -1,6 +1,5 @@
 package com.example.spaceshareproject;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -13,7 +12,7 @@ import androidx.annotation.Nullable;
 class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
-    public static final String DATABASE_NAME = "DataBase.db";
+    public static final String DATABASE_NAME = "DataBase2.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String TABLE_NAME = "offices";
@@ -24,8 +23,8 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_image = "office_image";
 
     private static final String  COLUMN_Availability = "Availability";
-
-
+    private static final String COLUMN_OwnerNAME = "OwnerName";
+    private static final String COLUMN_seekerNAME = "seekerName";
 
 
     public static final String TABLE = "Users";
@@ -44,10 +43,10 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String table1 = "CREATE TABLE " + TABLE_NAME +
-                        " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_NAME + " TEXT, " +
-                        COLUMN_PRICE + " INTEGER, " +
-                        COLUMN_SIZE + " INTEGER , " + COLUMN_Availability+" TEXT,"+
+                " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_NAME + " TEXT, " +
+                COLUMN_PRICE + " INTEGER, " +
+                COLUMN_SIZE + " INTEGER , " + COLUMN_Availability+" TEXT,"+ COLUMN_OwnerNAME+" TEXT,"+ COLUMN_seekerNAME+" TEXT,"+
                 COLUMN_image + " BLOB);";
 
 
@@ -66,15 +65,17 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE);
         onCreate(db);
 
-      }
+    }
 
-    void addOffice(String name, Integer price, int size){
+    void addOffice(String name, Integer price, int size,String ownerName,String seekerName){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_NAME, name);
         cv.put(COLUMN_PRICE, price);
         cv.put(COLUMN_SIZE, size);
+        cv.put(COLUMN_OwnerNAME, ownerName);
+        cv.put(COLUMN_seekerNAME, seekerName);
         String av="available";
         cv.put(COLUMN_Availability,av);
         long result = db.insert(TABLE_NAME,null, cv);
@@ -141,7 +142,7 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    public boolean rent(String row_id) {
+    public boolean rent(String row_id,String seeker) {
 
         SQLiteDatabase DB = this.getReadableDatabase();
         Cursor cursor = DB.rawQuery("SELECT " + COLUMN_Availability + " FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " =?", new String[]{row_id});
@@ -151,23 +152,45 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
                 SQLiteDatabase db = this.getWritableDatabase();
                 ContentValues cv = new ContentValues();
                 cv.put(COLUMN_Availability, "not available");
+                cv.put(COLUMN_seekerNAME, seeker);
                 long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+
                 if (result == -1) {
                     Toast.makeText(context, "failed to rent", Toast.LENGTH_SHORT).show();
                     return false;
                 }
                 return true;
-                }
-                Toast.makeText(context, "office not available", Toast.LENGTH_SHORT).show();
-                return false;
             }
             Toast.makeText(context, "office not available", Toast.LENGTH_SHORT).show();
             return false;
         }
+        Toast.makeText(context, "office not available", Toast.LENGTH_SHORT).show();
+        return false;
+    }
 
 
 
+    public boolean  annnulment(String row_id) {
 
+//add condition for duration
+        SQLiteDatabase DB = this.getReadableDatabase();
+        Cursor cursor = DB.rawQuery("SELECT " + COLUMN_Availability + " FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " =?", new String[]{row_id});
+
+            String availability = cursor.getString(0);
+
+                SQLiteDatabase db = this.getWritableDatabase();
+                long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
+                if (result == -1) {
+                    Toast.makeText(context, "Failed to annnulment.", Toast.LENGTH_SHORT).show();
+                    return false;
+                } else {
+                    Toast.makeText(context, "Successfully annnulment the contract!", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+
+
+    }
 
 
 
@@ -242,5 +265,4 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
 }
-
 

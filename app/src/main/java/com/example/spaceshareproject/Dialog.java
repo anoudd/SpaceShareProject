@@ -20,28 +20,30 @@ private DialogListener listener;
     @NonNull
     @Override
     public android.app.Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder b= new AlertDialog.Builder(getActivity());
-        LayoutInflater l=getActivity().getLayoutInflater();
-        View view= l.inflate(R.layout.rentdialog,null);
-        b.setView(view)
-        .setTitle("Rent Form")
-        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
 
-            }
-        });
-        b.setPositiveButton("submit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-               String n=name.getText().toString();
-               String d=duration.getText().toString();
-               listener.applyText(n,d);
-            }
-        });
-        name= view.findViewById(R.id.rentername);
-        duration= view.findViewById(R.id.duration);
-        return b.create();
+            AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+            LayoutInflater l = getActivity().getLayoutInflater();
+            View view = l.inflate(R.layout.rentdialog, null);
+            b.setView(view)
+                    .setTitle(" Form")
+                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+            b.setPositiveButton("submit", new DialogInterface.OnClickListener() {
+                @Override
+
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    String n = name.getText().toString();
+                    String d = duration.getText().toString();
+                    listener.applyText(n, d);
+                }
+            });
+            name = view.findViewById(R.id.rentername);
+            duration = view.findViewById(R.id.duration);
+            return b.create();
 
     }
 

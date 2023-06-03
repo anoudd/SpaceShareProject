@@ -1,4 +1,3 @@
-
 package com.example.spaceshareproject;
 
 import android.annotation.SuppressLint;
@@ -20,15 +19,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
+public class CustomAdapter2 extends RecyclerView.Adapter<CustomAdapter2.MyViewHolder> {
 
     private static Context context;
     private Activity activity;
-    private ArrayList office_id, office_name, office_price, office_size, OwnerName;
+    private ArrayList office_id, office_name, office_price, office_size, OwnerName,seekerName,availability;
     private String currentUser;
 
-    CustomAdapter(Activity activity, Context context, ArrayList office_id, ArrayList office_name, ArrayList office_price,
-                  ArrayList office_size, ArrayList OwnerName, String user){
+    CustomAdapter2(Activity activity, Context context, ArrayList office_id, ArrayList office_name, ArrayList office_price,
+                  ArrayList office_size, ArrayList OwnerName,ArrayList seekerName,ArrayList availability,String user){
         this.activity = activity;
         this.context = context;
         this.office_id = office_id;
@@ -36,6 +35,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.office_price = office_price;
         this.office_size = office_size;
         this.OwnerName = OwnerName;
+        this.seekerName=seekerName;
+      this.availability= availability;
         this.currentUser = user;
     }
 
@@ -52,10 +53,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
 
     public void onBindViewHolder(@NonNull final MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        int minSize = Math.min(Math.min(office_id.size(), office_name.size()), Math.min(office_price.size(), office_size.size()));
-        if (position < minSize && !OwnerName.isEmpty()) {
+
             String ownerName = String.valueOf(OwnerName.get(position));
-            if (ownerName.equals(currentUser)) {
+            if (!ownerName.equals(currentUser)) {
                 // The owner name for this office matches the current user
                 // Set the text for the views in the MyViewHolder instance
                 holder.office_id_txt.setText(String.valueOf(office_id.get(position)));
@@ -67,13 +67,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 holder.mainLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(context, UpdateActivity.class);
+                        Intent intent;
+                        intent = new Intent(context, rentActivity.class);
                         intent.putExtra("id", String.valueOf(office_id.get(position)));
                         intent.putExtra("name", String.valueOf(office_name.get(position)));
                         intent.putExtra("price", String.valueOf(office_price.get(position)));
                         intent.putExtra("size", String.valueOf(office_size.get(position)));
-                        activity.startActivityForResult(intent, 1);
-                    }
+                        intent.putExtra("seekerName", String.valueOf(seekerName.get(position)));
+                        intent.putExtra("availability", String.valueOf(availability.get(position)));
+
+                        intent.putExtra("ownerName",ownerName);
+                        intent.putExtra("login_username", currentUser);
+                        activity.startActivityForResult(intent, 1);}
+
                 });
             } else {
                 // The owner name for this office does not match the current user
@@ -82,7 +88,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
             }
         }
-    }
+
 
     @Override
     public int getItemCount() {
@@ -92,7 +98,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     static class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView office_id_txt, office_name_txt, office_price_txt, office_size_txt,OwnerName_txt;
+        TextView office_id_txt, office_name_txt, office_price_txt, office_size_txt,OwnerName_txt,seekerName_txt;
         LinearLayout mainLayout;
 
         MyViewHolder(@NonNull View itemView) {
@@ -102,6 +108,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             office_price_txt = itemView.findViewById(R.id.office_price_txt);
             office_size_txt = itemView.findViewById(R.id.office_size_txt);
             OwnerName_txt=  itemView.findViewById(R.id.OwnerName_txt);
+            OwnerName_txt=  itemView.findViewById(R.id.seekerName_txt);
             mainLayout = itemView.findViewById(R.id.mainLayout);
             //Animate Recyclerview
             Animation translate_anim = AnimationUtils.loadAnimation(context, R.anim.translate_anim);
@@ -111,3 +118,4 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
 }
+

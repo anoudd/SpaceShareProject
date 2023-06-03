@@ -1,12 +1,5 @@
 package com.example.spaceshareproject;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -16,44 +9,48 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-
-public class HomeActivity2 extends AppCompatActivity {
+//seeker
+public class otherOffices extends AppCompatActivity {
     RecyclerView recyclerView;
 
     ImageView empty_imageview;
     TextView no_data;
-
+    String user;
     MyDatabaseHelper myDB;
-    ArrayList<String> office_id, office_name, office_price, office_size;
-    CustomAdapter customAdapter;
+    ArrayList<String> office_id, office_name, office_price, office_size,OwnerName,seekerName,availability;
+    CustomAdapter2 customAdapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-
+        setContentView(R.layout.activity_all_offices1);
+        user = getIntent().getStringExtra("login_username");
         recyclerView = findViewById(R.id.recyclerView);
         empty_imageview = findViewById(R.id.empty_imageview);
         no_data = findViewById(R.id.no_data);
 
 
-        myDB = new MyDatabaseHelper(HomeActivity2.this);
+        myDB = new MyDatabaseHelper(otherOffices.this);
         office_id = new ArrayList<>();
         office_name = new ArrayList<>();
         office_price = new ArrayList<>();
         office_size = new ArrayList<>();
-
+        OwnerName = new ArrayList<>();
+        seekerName =new ArrayList<>();
+        availability =new ArrayList<>();
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(HomeActivity2.this,this, office_id, office_name, office_price,
-                office_size, "seeker");
-        recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity2.this));
+        customAdapter2 = new CustomAdapter2(otherOffices.this,this, office_id, office_name, office_price,
+                office_size,OwnerName,seekerName,availability,user);
+        recyclerView.setAdapter(customAdapter2);
+        recyclerView.setLayoutManager(new LinearLayoutManager(otherOffices.this));
 
     }
 
@@ -65,17 +62,25 @@ public class HomeActivity2 extends AppCompatActivity {
         }
     }
 
-    void storeDataInArrays(){
+    void storeDataInArrays() {
         Cursor cursor = myDB.readAllData();
-        if(cursor.getCount() == 0){
+        if (cursor.getCount() == 0) {
             empty_imageview.setVisibility(View.VISIBLE);
             no_data.setVisibility(View.VISIBLE);
-        }else{
-            while (cursor.moveToNext()){
+        } else {
+            while (cursor.moveToNext()) {
+
+                String ownerName = cursor.getString(5);
+
+                // Check if the logged-in user is the owner of the office
+
                 office_id.add(cursor.getString(0));
                 office_name.add(cursor.getString(1));
                 office_price.add(cursor.getString(2));
                 office_size.add(cursor.getString(3));
+                availability.add(cursor.getString(4));
+                OwnerName.add(cursor.getString(5));
+                seekerName.add(cursor.getString(6));
             }
             empty_imageview.setVisibility(View.GONE);
             no_data.setVisibility(View.GONE);

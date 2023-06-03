@@ -1,14 +1,13 @@
 package com.example.spaceshareproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Register extends AppCompatActivity {
 
@@ -30,7 +29,7 @@ public class Register extends AppCompatActivity {
         phonenumber = findViewById(R.id.phonenumber);
 
         signup = findViewById(R.id.btnsignup);
-         //  signin = findViewById(R.id.btnsignin);
+        //  signin = findViewById(R.id.btnsignin);
         DB = new MyDatabaseHelper(this);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +57,7 @@ public class Register extends AppCompatActivity {
                         if(insert){
                             Toast.makeText(Register.this, "Registered successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                            intent.putExtra("login_username", user);
                             startActivity(intent);
                         }else {
                             if (!DB.checkPassword(pass))

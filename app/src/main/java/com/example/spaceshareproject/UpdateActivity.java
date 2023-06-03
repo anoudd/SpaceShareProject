@@ -2,25 +2,22 @@ package com.example.spaceshareproject;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class UpdateActivity extends AppCompatActivity  {
+public class UpdateActivity extends AppCompatActivity {
 
     EditText name_input, price_input, size_input;
     Button update_button, delete_button;
-    TextView textView;
+
     String id, name, price, size;
 
 
@@ -35,7 +32,7 @@ public class UpdateActivity extends AppCompatActivity  {
         size_input = findViewById(R.id.offer_size);
         update_button = findViewById(R.id.update_button);
         delete_button = findViewById(R.id.delete_button);
-        textView=findViewById(R.id.renterInfo);
+
         //First we call this
         getAndSetIntentData();
 
@@ -44,10 +41,6 @@ public class UpdateActivity extends AppCompatActivity  {
         if (ab != null) {
             ab.setTitle(name);
         }
-
-
-
-
 
         update_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +104,4 @@ public class UpdateActivity extends AppCompatActivity  {
         });
         builder.create().show();
     }
-
-
 }
