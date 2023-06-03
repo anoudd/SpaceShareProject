@@ -24,11 +24,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     private static Context context;
     private Activity activity;
-    private ArrayList office_id, office_name, office_price, office_size, OwnerName;
+    private ArrayList office_id, office_name, office_price, office_size, OwnerName,textview;
     private String currentUser;
 
     CustomAdapter(Activity activity, Context context, ArrayList office_id, ArrayList office_name, ArrayList office_price,
-                  ArrayList office_size, ArrayList OwnerName, String user){
+                  ArrayList office_size, ArrayList OwnerName, String user, ArrayList tv){
         this.activity = activity;
         this.context = context;
         this.office_id = office_id;
@@ -37,6 +37,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.office_size = office_size;
         this.OwnerName = OwnerName;
         this.currentUser = user;
+        this.textview=tv;
     }
 
     @NonNull
@@ -67,7 +68,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 holder.mainLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         Intent intent = new Intent(context, UpdateActivity.class);
+
+                        intent.putExtra("tv", String.valueOf(textview.get(position)));
                         intent.putExtra("id", String.valueOf(office_id.get(position)));
                         intent.putExtra("name", String.valueOf(office_name.get(position)));
                         intent.putExtra("price", String.valueOf(office_price.get(position)));

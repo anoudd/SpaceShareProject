@@ -37,7 +37,7 @@ public class rentActivity extends AppCompatActivity implements Dialog.DialogList
 
         rentername=findViewById(R.id.rentername);
         duration=findViewById(R.id.duration);
-        textview=findViewById(R.id.renterInfo1);
+
 
 
         ActionBar ab = getSupportActionBar();
@@ -159,6 +159,8 @@ dialog.show(getSupportFragmentManager(),"Rent Form");
 
     @Override
     public void applyText(String name, String duration) {
+        MyDatabaseHelper db= new MyDatabaseHelper(this);
+
         String s="Rented by:"+name+"  duration:"+duration;
         textview.setText(s);
 

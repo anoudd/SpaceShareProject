@@ -22,12 +22,6 @@
             android:layout_marginBottom="10dp"
             android:src="@drawable/logo" />
 
-        <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="135dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="55dp"
-            android:text="Owner" />
 
         <EditText
             android:id="@+id/login_username"

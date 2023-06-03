@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -17,8 +18,8 @@ public class UpdateActivity extends AppCompatActivity {
 
     EditText name_input, price_input, size_input;
     Button update_button, delete_button;
-
-    String id, name, price, size;
+     TextView textview;
+    String id, name, price, size,tv;
 
 
     @SuppressLint("MissingInflatedId")
@@ -32,7 +33,7 @@ public class UpdateActivity extends AppCompatActivity {
         size_input = findViewById(R.id.offer_size);
         update_button = findViewById(R.id.update_button);
         delete_button = findViewById(R.id.delete_button);
-
+        textview=findViewById(R.id.renterInfo);
         //First we call this
         getAndSetIntentData();
 
@@ -63,19 +64,24 @@ public class UpdateActivity extends AppCompatActivity {
     }
 
     void getAndSetIntentData(){
-        Log.d("asd", getIntent().getStringExtra("id"));;
+        Log.d("asd", getIntent().getStringExtra("tv"));
+        Log.d("asd", getIntent().getStringExtra("id"));
         Log.d("asd", getIntent().getStringExtra("name"));
         Log.d("asd", getIntent().getStringExtra("price"));
         Log.d("asd", getIntent().getStringExtra("size"));
         if(        getIntent().hasExtra("id")
+        && getIntent().hasExtra("tv")
                 && getIntent().hasExtra("name")
                 && getIntent().hasExtra("price")
                 && getIntent().hasExtra("size")){
             //Getting Data from Intent
+            tv = getIntent().getStringExtra("tv");
             id = getIntent().getStringExtra("id");
             name = getIntent().getStringExtra("name");
             price = getIntent().getStringExtra("price");
             size = getIntent().getStringExtra("size");
+            String s ="Rented by: "+tv;
+            textview.setText(s);
             name_input.append(name);
             price_input.append(price);
             size_input.append(size);

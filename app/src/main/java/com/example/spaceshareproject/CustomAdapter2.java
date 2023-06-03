@@ -108,7 +108,7 @@ public class CustomAdapter2 extends RecyclerView.Adapter<CustomAdapter2.MyViewHo
             office_price_txt = itemView.findViewById(R.id.office_price_txt);
             office_size_txt = itemView.findViewById(R.id.office_size_txt);
             OwnerName_txt=  itemView.findViewById(R.id.OwnerName_txt);
-            OwnerName_txt=  itemView.findViewById(R.id.seekerName_txt);
+            seekerName_txt=  itemView.findViewById(R.id.seekerName_txt);
             mainLayout = itemView.findViewById(R.id.mainLayout);
             //Animate Recyclerview
             Animation translate_anim = AnimationUtils.loadAnimation(context, R.anim.translate_anim);

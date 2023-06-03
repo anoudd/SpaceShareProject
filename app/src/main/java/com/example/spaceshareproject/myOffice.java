@@ -28,7 +28,7 @@ public class myOffice extends AppCompatActivity {
     String user;
 
     MyDatabaseHelper myDB;
-    ArrayList<String> office_id, office_name, office_price, office_size,OwnerName;
+    ArrayList<String> office_id, office_name, office_price, office_size,OwnerName,tv;
     CustomAdapter customAdapter;
 
     @Override
@@ -59,10 +59,11 @@ public class myOffice extends AppCompatActivity {
         office_price = new ArrayList<>();
         office_size = new ArrayList<>();
         OwnerName = new ArrayList<>();
+        tv=new ArrayList<>();
         storeDataInArrays();
 
         customAdapter = new CustomAdapter(myOffice.this,this, office_id, office_name, office_price,
-                office_size ,OwnerName,user);
+                office_size ,OwnerName,user,tv);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(myOffice.this));
 
@@ -87,7 +88,7 @@ public class myOffice extends AppCompatActivity {
                 String ownerName = cursor.getString(5);
 
                 // Check if the logged-in user is the owner of the office
-
+                     tv.add(cursor.getString(6));
                     office_id.add(cursor.getString(0));
                     office_name.add(cursor.getString(1));
                     office_price.add(cursor.getString(2));

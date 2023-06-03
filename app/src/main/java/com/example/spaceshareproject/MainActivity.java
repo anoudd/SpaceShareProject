@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText login_username, login_password;
     Button login_button, login_gotoR;
-    RadioButton radio_button;
+
     MyDatabaseHelper DB;
 
     @Override
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         login_password = findViewById(R.id.login_password);
         login_button = findViewById(R.id.login_button);
         login_gotoR = findViewById(R.id.login_gotoR);
-        radio_button=findViewById(R.id.radioButton);
+
         DB = new MyDatabaseHelper(this);
 
         login_button.setOnClickListener(new View.OnClickListener() {
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String user = login_username.getText().toString();
                 String pass = login_password.getText().toString();
-                Boolean RadioButtonState = radio_button.isChecked();
+
 
                 if(user.equals("")||pass.equals(""))
                     Toast.makeText(MainActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
@@ -45,13 +45,10 @@ public class MainActivity extends AppCompatActivity {
 
                         Toast.makeText(MainActivity.this, "Sign in successfully ", Toast.LENGTH_SHORT).show();
                         Intent intent;
-                        if(RadioButtonState){
+
                         intent = new Intent(getApplicationContext(),HomeActivity.class);
                         intent.putExtra("login_username", user);
-                        startActivity(intent);}
-                             else{intent = new Intent(getApplicationContext(), HomeActivity.class);
-                            intent.putExtra("login_username", user);
-                            startActivity(intent);}
+                        startActivity(intent);
 
                     } else {
                         Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();

@@ -200,6 +200,9 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
 
 
 
+
+
+
     public Boolean insertData(String phonenumber, String password,String firstname, String username , String lastname){
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues contentValues= new ContentValues();
