@@ -35,7 +35,7 @@
         <activity
             android:name=".AddActivity"
             android:label="Add Office"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".myOffice" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
