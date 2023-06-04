@@ -2,8 +2,11 @@ package com.example.spaceshareproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 //main
@@ -21,6 +24,7 @@ public class HomeActivity extends AppCompatActivity {
         // Initialize buttons
         firstButton = findViewById(R.id.first_button);
         secondButton = findViewById(R.id.second_button);
+
 
         // Set click listeners for buttons
         firstButton.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +44,13 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.my_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
 
