@@ -132,11 +132,7 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
             } else Toast.makeText(context, "Sorry, can't delete it's rented.", Toast.LENGTH_SHORT).show();
         }
     }
-    void deleteAllData(){
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_NAME);
-    }
 
 
 
