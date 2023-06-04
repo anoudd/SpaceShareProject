@@ -151,7 +151,7 @@ public class rentActivity extends AppCompatActivity implements Dialog.DialogList
 
     public void openDialog(){
 
-Dialog dialog= new Dialog();
+Dialog dialog= new Dialog(seekerName);
 dialog.show(getSupportFragmentManager(),"Rent Form");
 
 

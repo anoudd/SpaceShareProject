@@ -16,6 +16,10 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 public class Dialog extends AppCompatDialogFragment {
 private EditText name,duration;
 private DialogListener listener;
+String seekerName;
+    public Dialog(String seekerName) {
+        this.seekerName=seekerName;
+    }
 
     @NonNull
     @Override
@@ -60,7 +64,7 @@ private DialogListener listener;
 
     public interface DialogListener{
 
-        void applyText(String name,String duration);
+        void applyText(String seekerName,String duration);
 
 }
 
